@@ -5,11 +5,18 @@ using UnityEngine;
 public class Bomb : MonoBehaviour
 {
     public GameObject ExplosionEffect;
+
+    public float gravityScale;
+    Rigidbody _rigidbody;
     private void Start()
     {
-        StartCoroutine(ExplosionCoroutine());   
+        _rigidbody = GetComponent<Rigidbody>();
+        StartCoroutine(ExplosionCoroutine());
     }
-
+    private void FixedUpdate()
+    {
+        _rigidbody.AddForce(Physics.gravity*gravityScale, ForceMode.Acceleration);
+    }
     IEnumerator ExplosionCoroutine()
     {
         yield return new WaitForSeconds(3f);
