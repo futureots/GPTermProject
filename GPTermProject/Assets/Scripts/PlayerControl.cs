@@ -14,20 +14,19 @@ public class PlayerControl : MonoBehaviour
     public float speed;
     public float rotateSpeed;
 
-    public GameObject cameraObj;
     private void Awake()
     {
         _inputActions = new InputSystem_Actions();
     }
     void Start()
     {
-        _inputActions.Player.Attack.performed += value =>
+        /*_inputActions.Player.Attack.performed += value =>
         {
             Debug.Log("Throw");
             var cake = Instantiate(cupCake,transform.position+ cameraObj.transform.forward,transform.rotation);
             var rigidbody = cake.GetComponent<Rigidbody>();
-            rigidbody.AddForce(cameraObj.transform.forward*power, ForceMode.Impulse);
-        };
+            rigidbody.AddForce((cameraObj.transform.forward+ Vector3.up)*power, ForceMode.Impulse);
+        };*/
         _inputActions.Player.Move.performed += value =>
         {
             Vector2 vec = value.ReadValue<Vector2>();
@@ -41,7 +40,6 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        SetCamera();
 
         var mouseX = Input.GetAxis("Mouse X");
         var rot = transform.rotation.eulerAngles;
@@ -51,14 +49,6 @@ public class PlayerControl : MonoBehaviour
 
         transform.Translate(direction.normalized * speed * Time.deltaTime);
 
-    }
-
-    void SetCamera()
-    {
-        var mouseY = Input.GetAxis("Mouse Y");
-        var rot = cameraObj.transform.rotation.eulerAngles;
-        rot.x -= mouseY * rotateSpeed * 100 * Time.deltaTime;
-        cameraObj.transform.rotation = Quaternion.Euler(rot);
     }
     private void OnEnable()
     {
