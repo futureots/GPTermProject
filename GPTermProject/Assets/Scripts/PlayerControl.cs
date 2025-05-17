@@ -51,6 +51,7 @@ public class PlayerControl : MonoBehaviour
         {
             var vec = value.ReadValue<Vector2>();
             transform.Rotate(Vector3.up * vec.x * rotateSpeed * 0.1f);
+            Camera.main.transform.Rotate(Vector3.left * vec.y * rotateSpeed * 0.1f);
         };
     }
 
@@ -64,7 +65,7 @@ public class PlayerControl : MonoBehaviour
         yield return new WaitForSeconds(0.65f);
         var cake = Instantiate(cupCake, rHand.position, rHand.rotation);
         var rigidbody = cake.GetComponent<Rigidbody>();
-        rigidbody.AddForce((transform.forward + Vector3.up).normalized * power, ForceMode.Impulse);
+        rigidbody.AddForce((Camera.main.transform.forward + Vector3.up).normalized * power, ForceMode.Impulse);
         yield return new WaitForSeconds(1.5f);
         //isThrowing = false;
     }
