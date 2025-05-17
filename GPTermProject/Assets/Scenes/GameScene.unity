@@ -8343,7 +8343,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cupCake: {fileID: 4916979268830257252, guid: 0905426a0979134458ff01482f3798da, type: 3}
   rHand: {fileID: 2055308200}
-  anim: {fileID: 0}
+  anim: {fileID: 1023662632}
   speed: 5
   rotateSpeed: 1
   power: 10
@@ -8394,9 +8394,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.1138092
-  m_Height: 1.4774381
+  m_Height: 1.4284997
   m_Direction: 1
-  m_Center: {x: 0, y: 0.6887191, z: 0}
+  m_Center: {x: 0, y: 0.7131883, z: 0}
 --- !u!4 &1769473890
 Transform:
   m_ObjectHideFlags: 0
@@ -9143,7 +9143,7 @@ Transform:
   m_GameObject: {fileID: 1906128128}
   serializedVersion: 2
   m_LocalRotation: {x: -1.480898e-14, y: 2.842171e-14, z: -9.094947e-13, w: 1}
-  m_LocalPosition: {x: 0, y: 1.25, z: 0}
+  m_LocalPosition: {x: 0, y: 1.25, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

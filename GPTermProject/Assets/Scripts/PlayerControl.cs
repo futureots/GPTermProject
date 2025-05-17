@@ -59,6 +59,7 @@ public class PlayerControl : MonoBehaviour
     IEnumerator ThrowCoroutine()
     {
         anim.SetTrigger("Throw");
+        
         //isThrowing = true;  
         yield return new WaitForSeconds(0.65f);
         var cake = Instantiate(cupCake, rHand.position, rHand.rotation);
@@ -71,6 +72,9 @@ public class PlayerControl : MonoBehaviour
     void Update()
     {
         transform.Translate(direction * Time.deltaTime * speed);
+        Debug.Log(direction);
+        anim.SetFloat("deltaX", direction.x);
+        anim.SetFloat("deltaZ", direction.z);
     }
     private void OnEnable()
     {
