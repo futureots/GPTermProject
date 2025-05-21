@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour, IHitable
     public int power;
 
     public Collider punch;
+    public Rigidbody rigidbody;
 
     public IState state;
     public void SetState(IState state)
@@ -25,6 +26,7 @@ public class Enemy : MonoBehaviour, IHitable
         //이동 상태
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
+        rigidbody = GetComponent<Rigidbody>();
         SetState(new MoveState());
 
     }
@@ -32,7 +34,10 @@ public class Enemy : MonoBehaviour, IHitable
     private void Update()
     {
         state.Update();
-        //Debug.Log((transform.position - targetTr.position).magnitude);
+        var distance = (transform.position - targetTr.position).magnitude;
+        //Debug.Log(distance);
+        
+        
     }
     public void Hit(int damage)
     {
@@ -67,4 +72,16 @@ public class Enemy : MonoBehaviour, IHitable
             Debug.Log("Cake!!!");
         }
     }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.tag == "Cake")
+        {
+            //도착 및 공격 시작
+            //SetState(new MoveState());
+            Debug.Log("Im out");
+        }
+        
+    }
+
 }

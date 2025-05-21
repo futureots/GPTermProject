@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4126450064442988150}
   - component: {fileID: 6823632126363392195}
   - component: {fileID: 1174039109512041088}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Circle.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 3234424567531439677}
   - component: {fileID: 1867342595294886830}
   - component: {fileID: 6464918414563694575}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sphere.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -186,7 +186,7 @@ GameObject:
   - component: {fileID: 8576605741241279529}
   - component: {fileID: -8330649010446339050}
   - component: {fileID: -8251974278471373989}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: CupCake1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -243,7 +243,7 @@ Rigidbody:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
@@ -285,7 +285,7 @@ GameObject:
   - component: {fileID: 3230702384617758779}
   - component: {fileID: 5513053644497142917}
   - component: {fileID: 697581929172734439}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Circle.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -370,7 +370,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6534349533998318428}
   - component: {fileID: 2614894708626523131}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: geo1.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
