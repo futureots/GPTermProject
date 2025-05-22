@@ -4,15 +4,12 @@ public class DeadState : IState
 {
     public void Enter(Enemy _enemy)
     {
-        _enemy.anim.SetTrigger("Die");
-    }
 
-    public void Exit()
-    {
+        _enemy.anim.SetTrigger("Die");
         
     }
 
-    public void Update()
+    public void Exit()
     {
         
     }

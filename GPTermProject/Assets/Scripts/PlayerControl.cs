@@ -3,6 +3,7 @@ using System.Threading;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -52,10 +53,13 @@ public class PlayerControl : MonoBehaviour
             var vec = value.ReadValue<Vector2>();
             transform.Rotate(Vector3.up * vec.x * rotateSpeed * 0.1f);
 
-            var rot = Camera.main.transform.rotation.eulerAngles;
+            var rot = Camera.main.transform.eulerAngles;
+            rot.x = rot.x > 180f ? rot.x-360 : rot.x;
             rot.x -= vec.y * rotateSpeed * 10 * Time.deltaTime;
-            
-            Camera.main.transform.rotation = Quaternion.Euler(rot);
+            rot.x = Mathf.Clamp(rot.x, -80, 80);
+
+            rot.x = rot.x <0 ? rot.x+360 : rot.x;
+            Camera.main.transform.eulerAngles = rot;
 
         };
     }

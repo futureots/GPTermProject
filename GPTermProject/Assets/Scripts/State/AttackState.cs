@@ -16,10 +16,4 @@ public class AttackState : IState
         enemy.anim.SetBool("Attack", false);
         //enemy.rigidbody.isKinematic = false;
     }
-
-    public void Update()
-    {
-        //enemy.transform.LookAt(enemy.targetTr);
-        
-    }
 }

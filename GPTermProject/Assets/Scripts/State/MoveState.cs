@@ -11,9 +11,6 @@ public class MoveState : IState
     {
         enemy = _enemy;
         enemy.anim.SetBool("Move", true);
-        if(enemy.agent.hasPath)
-            enemy.agent?.ResetPath();
-        enemy.agent.SetDestination(enemy.targetTr.position);
     }
 
     public void Exit()
@@ -22,9 +19,4 @@ public class MoveState : IState
         //enemy.agent.isStopped = true;
     }
 
-    public void Update()
-    {
-        enemy.transform.LookAt(enemy.targetTr);
-        //enemy.agent.SetDestination(enemy.targetTr.position);
-    }
 }

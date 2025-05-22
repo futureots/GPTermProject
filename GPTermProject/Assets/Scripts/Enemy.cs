@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -10,8 +11,9 @@ public class Enemy : MonoBehaviour, IHitable
     public int hp;
     public int power;
 
+    new public Collider collider;
     public Collider punch;
-    public Rigidbody rigidbody;
+    new public Rigidbody rigidbody;
 
     public IState state;
     public void SetState(IState state)
@@ -21,35 +23,58 @@ public class Enemy : MonoBehaviour, IHitable
         state.Enter(this);
     }
 
-    private void Start()
+    private void Awake()
     {
         //이동 상태
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
         rigidbody = GetComponent<Rigidbody>();
-        SetState(new MoveState());
-
+        collider = GetComponent<Collider>();
+        
     }
+
+    public void Init()
+    {
+        gameObject.SetActive(true);
+        agent.isStopped = false;
+        collider.enabled = true;
+        SetState(new MoveState());
+        if (agent.hasPath)
+            agent?.ResetPath();
+        agent.SetDestination(targetTr.position);
+        StartCoroutine(SetRigidbody());
+    }
+
 
     private void Update()
     {
-        state.Update();
         var distance = (transform.position - targetTr.position).magnitude;
         //Debug.Log(distance);
         
         
+        
+    }
+    IEnumerator SetRigidbody()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(3);
+            rigidbody.linearVelocity = Vector3.zero;
+            rigidbody.angularVelocity = Vector3.zero;
+        }
     }
     public void Hit(int damage)
     {
         hp -= damage;
-        if(hp < 0)
+        Debug.Log(hp);
+        if(hp <= 0)
         {
             //사망 이벤트 발생
-
             Dead();
         }
         else
         {
+            anim.SetTrigger("Hit");
             //피격 이벤트 발생
         }
     }
@@ -57,10 +82,21 @@ public class Enemy : MonoBehaviour, IHitable
 
     public void Dead()
     {
-        //사망 모션 출력
+        
+        StopAllCoroutines();
         agent.isStopped = true;
+        collider.enabled = false;
+        
+        GameManager.Instance.enemyPool.Release(this);
+        // 사망 모션 출력
         SetState(new DeadState());
-        Destroy(gameObject, 5);
+        StartCoroutine(SetDisable());
+        
+    }
+    IEnumerator SetDisable()
+    {
+        yield return new WaitForSeconds(3f);
+        gameObject.SetActive(false);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -69,19 +105,9 @@ public class Enemy : MonoBehaviour, IHitable
         {
             //도착 및 공격 시작
             SetState(new AttackState());
-            Debug.Log("Cake!!!");
+            
+            //Debug.Log("Cake!!!");
         }
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.gameObject.tag == "Cake")
-        {
-            //도착 및 공격 시작
-            //SetState(new MoveState());
-            Debug.Log("Im out");
-        }
-        
     }
 
 }
