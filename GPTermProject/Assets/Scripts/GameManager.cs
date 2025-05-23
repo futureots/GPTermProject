@@ -5,12 +5,13 @@ using UnityEngine.Pool;
 
 public class GameManager : Singleton<GameManager>
 {
+    public int point = 0;
     public Cake cake;
 
     //적 오브젝트 풀
     public ObjectPool<Enemy> enemyPool;
     public Transform pool;
-
+    
 
     [ContextMenuItem("SetSpawnPoint","SetSpawnPointList")]
     public List<GameObject> SpawnPoint;
@@ -20,7 +21,6 @@ public class GameManager : Singleton<GameManager>
     {
         enemyPool = new ObjectPool<Enemy>(
             createFunc: SpawnEnemy,
-            actionOnGet: x => x.Init(),
             actionOnDestroy: DestroyEnemy,
             collectionCheck: false,
             defaultCapacity: 10,
@@ -43,11 +43,24 @@ public class GameManager : Singleton<GameManager>
     }
     IEnumerator SpawnEnemyCoroutine()
     {
+        var spawnPool = new List<GameObject>();
+        spawnPool.AddRange(SpawnPoint);
         while (true)
         {
             yield return new WaitForSeconds(1);
             var enemy = enemyPool.Get();
-            enemy.transform.position = SpawnPoint[Random.Range(0, SpawnPoint.Count)].transform.position;
+            if (spawnPool.Count < 3)
+            {
+                spawnPool.AddRange(SpawnPoint);
+            }
+            var rand = Random.Range(0, spawnPool.Count);
+
+            var point = spawnPool[rand];
+            spawnPool.RemoveAt(rand);
+           // Debug.Log("Spawn : " + SpawnPoint[rand].transform.position);
+            enemy.agent.Warp(point.transform.position);
+            enemy.Init();
+            //Debug.Log("Enemy : " + enemy.transform.position);
         }
     }
 

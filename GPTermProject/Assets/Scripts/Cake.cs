@@ -2,11 +2,12 @@ using UnityEngine;
 
 public class Cake : MonoBehaviour
 {
-    public int hp;
+    public int maxHp =1000;
+    public int curHp {  get; private set; }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        curHp = maxHp;
     }
 
     // Update is called once per frame
@@ -18,8 +19,7 @@ public class Cake : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Punch"))
         {
-            hp -= 10;
-            Debug.Log(hp);
+            curHp -= 1;
         }
     }
 }

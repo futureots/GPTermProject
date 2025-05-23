@@ -2920,7 +2920,7 @@ MonoBehaviour:
   targetTr: {fileID: 0}
   agent: {fileID: 0}
   anim: {fileID: 0}
-  hp: 110
+  hp: 50
   power: 100
   collider: {fileID: 0}
   punch: {fileID: 4740186858503022524}

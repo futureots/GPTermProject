@@ -66,7 +66,6 @@ public class Enemy : MonoBehaviour, IHitable
     public void Hit(int damage)
     {
         hp -= damage;
-        Debug.Log(hp);
         if(hp <= 0)
         {
             //사망 이벤트 발생
@@ -86,7 +85,9 @@ public class Enemy : MonoBehaviour, IHitable
         StopAllCoroutines();
         agent.isStopped = true;
         collider.enabled = false;
-        
+
+        GameManager.Instance.point += 100;
+
         GameManager.Instance.enemyPool.Release(this);
         // 사망 모션 출력
         SetState(new DeadState());
@@ -95,7 +96,7 @@ public class Enemy : MonoBehaviour, IHitable
     }
     IEnumerator SetDisable()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1f);
         gameObject.SetActive(false);
     }
 
