@@ -5,6 +5,8 @@ using UnityEngine;
 public class Bomb : MonoBehaviour
 {
     public GameObject ExplosionEffect;
+
+    public float explosionTime;
     private void Start()
     {
         StartCoroutine(ExplosionCoroutine());   
@@ -12,7 +14,7 @@ public class Bomb : MonoBehaviour
 
     IEnumerator ExplosionCoroutine()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(explosionTime);
         var effect = Instantiate(ExplosionEffect,transform.position,transform.rotation);
 
         var list = Physics.OverlapSphere(transform.position, 7.5f);

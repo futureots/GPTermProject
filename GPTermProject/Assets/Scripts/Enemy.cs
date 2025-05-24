@@ -96,7 +96,7 @@ public class Enemy : MonoBehaviour, IHitable
     }
     IEnumerator SetDisable()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(3f);
         gameObject.SetActive(false);
     }
 

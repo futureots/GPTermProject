@@ -27,14 +27,6 @@ public class PlayerControl : MonoBehaviour
     bool isThrowing = false;
     private void Start()
     {
-        _inputActions.Player.Attack.performed += value =>
-        {
-            Debug.Log("Throw");
-            if (!isThrowing)
-            {
-                StartCoroutine(ThrowCoroutine());
-            }
-        };
         _inputActions.Player.Move.started += value => anim.SetBool("IsRun", true);
         _inputActions.Player.Move.performed += value =>
         {
@@ -62,16 +54,42 @@ public class PlayerControl : MonoBehaviour
             Camera.main.transform.eulerAngles = rot;
 
         };
+        _inputActions.Player.Attack.performed += Throw;
+        _inputActions.Player.Interact.performed += Roll;
+        GameManager.Instance.OnGameOver.AddListener(() =>
+        {
+            _inputActions.Player.Attack.performed -= Throw;
+            _inputActions.Player.Interact.performed -= Roll;
+        });
     }
-
-
-
+    void Roll(InputAction.CallbackContext context)
+    {
+        if (!isThrowing)
+        {
+            StartCoroutine(RollCoroutine());
+        }
+    }
+    void Throw(InputAction.CallbackContext context)
+    {
+        Debug.Log("Throw");
+        if (!isThrowing)
+        {
+            StartCoroutine(ThrowCoroutine());
+        }
+    }
+    IEnumerator RollCoroutine()
+    {
+        var cake = Instantiate(cupCake, rHand.position, rHand.rotation);
+        var rigidbody = cake.GetComponent<Rigidbody>();
+        rigidbody.AddForce(Camera.main.transform.forward * power * 0.1f, ForceMode.Impulse);
+        yield return new WaitForSeconds(1.5f);
+    }
     IEnumerator ThrowCoroutine()
     {
-        anim.SetTrigger("Throw");
+        //anim.SetTrigger("Throw");
         
         //isThrowing = true;  
-        yield return new WaitForSeconds(0.65f);
+        //yield return new WaitForSeconds(0.65f);
         var cake = Instantiate(cupCake, rHand.position, rHand.rotation);
         var rigidbody = cake.GetComponent<Rigidbody>();
         rigidbody.AddForce((Camera.main.transform.forward+Vector3.up*0.5f).normalized * power, ForceMode.Impulse);

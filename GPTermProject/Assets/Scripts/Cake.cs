@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Cake : MonoBehaviour
@@ -19,7 +20,16 @@ public class Cake : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Punch"))
         {
-            curHp -= 1;
+            DecreaseHp(1);
+        }
+    }
+    public void DecreaseHp(int i)
+    {
+        curHp -= i;
+        if (curHp <= 0)
+        {
+            GameManager.Instance.GameOver();
+            gameObject.SetActive(false);
         }
     }
 }
