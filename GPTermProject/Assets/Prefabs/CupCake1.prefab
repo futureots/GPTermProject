@@ -224,7 +224,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ExplosionEffect: {fileID: 727279671219116884, guid: 5baf361e16e902f4bb30b9f281d0142b, type: 3}
-  explosionTime: 2
+  explosionTime: 3
 --- !u!54 &-8330649010446339050
 Rigidbody:
   m_ObjectHideFlags: 0

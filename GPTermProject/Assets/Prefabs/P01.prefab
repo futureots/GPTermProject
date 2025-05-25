@@ -2777,8 +2777,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8942734549851988516}
   - component: {fileID: 8903687710321359521}
-  - component: {fileID: 8820510096799273463}
   - component: {fileID: 7961878996805647715}
+  - component: {fileID: 4825992336570578614}
   - component: {fileID: 4184085743303724364}
   - component: {fileID: 3148312171714361421}
   m_Layer: 6
@@ -2833,7 +2833,30 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!54 &8820510096799273463
+--- !u!136 &7961878996805647715
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8597698371886135454}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1.5938855
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.8071533, z: 0}
+--- !u!54 &4825992336570578614
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2860,29 +2883,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!136 &7961878996805647715
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8597698371886135454}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 1.5938855
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.8071533, z: 0}
 --- !u!195 &4184085743303724364
 NavMeshAgent:
   m_ObjectHideFlags: 0
