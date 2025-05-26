@@ -39,6 +39,7 @@ public class GameManager : Singleton<GameManager>
             maxSize: 100
             );
         StartCoroutine(SpawnEnemyCoroutine());
+        Cursor.visible = false;
     }
 
     // Àû »ý¼º
@@ -61,7 +62,7 @@ public class GameManager : Singleton<GameManager>
         {
             yield return new WaitForSeconds(1);
             var enemy = enemyPool.Get();
-            if (spawnPool.Count < 3)
+            if (spawnPool.Count < 5)
             {
                 spawnPool.AddRange(SpawnPoint);
             }
@@ -113,5 +114,6 @@ public class GameManager : Singleton<GameManager>
         }
 
         OnGameOver?.Invoke();
+        Cursor.visible = true;
     }
 }

@@ -13,4 +13,9 @@ public class DeadState : IState
     {
         
     }
+
+    public void Update(Enemy _enemy)
+    {
+       
+    }
 }

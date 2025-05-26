@@ -15,7 +15,7 @@ public class Bomb : MonoBehaviour
     IEnumerator ExplosionCoroutine()
     {
         yield return new WaitForSeconds(explosionTime);
-        var effect = Instantiate(ExplosionEffect,transform.position,transform.rotation);
+        var effect = Instantiate(ExplosionEffect,transform.position,Quaternion.identity);
 
         var list = Physics.OverlapSphere(transform.position, 7.5f);
 

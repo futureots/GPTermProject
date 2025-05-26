@@ -28,7 +28,7 @@ public class Enemy : MonoBehaviour, IHitable
         //이동 상태
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
-        //rigidbody = GetComponent<Rigidbody>();
+        rigidbody = GetComponent<Rigidbody>();
         collider = GetComponent<Collider>();
         
     }
@@ -45,7 +45,7 @@ public class Enemy : MonoBehaviour, IHitable
         StartCoroutine(SetRigidbody());
     }
 
-
+    
     private void Update()
     {
         var distance = (transform.position - targetTr.position).magnitude;
@@ -58,9 +58,9 @@ public class Enemy : MonoBehaviour, IHitable
     {
         while (true)
         {
-            yield return new WaitForSeconds(3);
-            //rigidbody.linearVelocity = Vector3.zero;
-            //rigidbody.angularVelocity = Vector3.zero;
+            yield return new WaitForSeconds(1);
+            rigidbody.linearVelocity = Vector3.zero;
+            rigidbody.angularVelocity = Vector3.zero;
         }
     }
     public void Hit(int damage)
