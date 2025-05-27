@@ -17,7 +17,7 @@ public class Bomb : MonoBehaviour
         yield return new WaitForSeconds(explosionTime);
         var effect = Instantiate(ExplosionEffect,transform.position,Quaternion.identity);
 
-        var list = Physics.OverlapSphere(transform.position, 7.5f);
+        /*var list = Physics.OverlapSphere(transform.position, 7.5f);
 
         foreach (var item in list)
         {
@@ -26,7 +26,7 @@ public class Bomb : MonoBehaviour
             {
                 enemy.Hit(100);
             }
-        }
+        }*/
 
         Destroy(effect, 5f);
         Destroy(gameObject);

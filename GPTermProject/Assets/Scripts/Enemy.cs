@@ -66,6 +66,7 @@ public class Enemy : MonoBehaviour, IHitable
     public void Hit(int damage)
     {
         hp -= damage;
+        Debug.Log("Hit : "+ hp);
         if(hp <= 0)
         {
             //사망 이벤트 발생

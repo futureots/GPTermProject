@@ -40,6 +40,7 @@ public class GameManager : Singleton<GameManager>
             );
         StartCoroutine(SpawnEnemyCoroutine());
         Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Àû »ý¼º
@@ -115,5 +116,6 @@ public class GameManager : Singleton<GameManager>
 
         OnGameOver?.Invoke();
         Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 }

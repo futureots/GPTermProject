@@ -13537,7 +13537,7 @@ ParticleSystem:
   CollisionModule:
     enabled: 0
     serializedVersion: 4
-    type: 0
+    type: 1
     collisionMode: 0
     colliderForce: 0
     multiplyColliderForceByParticleSize: 0
@@ -13718,7 +13718,7 @@ ParticleSystem:
   TriggerModule:
     enabled: 0
     serializedVersion: 2
-    inside: 1
+    inside: 2
     outside: 0
     enter: 0
     exit: 0
@@ -29403,6 +29403,7 @@ GameObject:
   - component: {fileID: 2538301155430840170}
   - component: {fileID: 2538301155430840164}
   - component: {fileID: 2538301155430840165}
+  - component: {fileID: 792807254668418465}
   m_Layer: 0
   m_Name: Explosion2
   m_TagString: Untagged
@@ -29419,7 +29420,7 @@ Transform:
   m_GameObject: {fileID: 2538301155430840171}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -9, z: 0}
+  m_LocalPosition: {x: 0, y: -9.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -33249,7 +33250,7 @@ ParticleSystem:
     maxCollisionShapes: 256
     quality: 0
     voxelSize: 0.5
-    collisionMessages: 0
+    collisionMessages: 1
     collidesWithDynamic: 1
     interiorCollisions: 0
   TriggerModule:
@@ -34297,6 +34298,20 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &792807254668418465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2538301155430840171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fc96b5a28e8d394589a4e95404c2aa2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  size: 1
+  damage: 10
 --- !u!1 &2538301155574583967
 GameObject:
   m_ObjectHideFlags: 0
