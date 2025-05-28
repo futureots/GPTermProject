@@ -5,11 +5,9 @@ public class PointPanel : MonoBehaviour
 {
     public TextMeshProUGUI pointText;
     public TextMeshProUGUI timeText;
-    float time;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        time = 0;
         //pointText = GetComponentInChildren<TextMeshProUGUI>();
     }
 
@@ -19,7 +17,7 @@ public class PointPanel : MonoBehaviour
         var point = GameManager.Instance.point;
         pointText.text = $"Point : {point}";
 
-        time += Time.deltaTime;
+        int time = (int)GameManager.Instance.time;
         timeText.text = (time / 60).ToString("00") + " : " + (time % 60).ToString("00");
     }
 }

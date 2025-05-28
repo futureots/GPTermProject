@@ -20,4 +20,8 @@ public class ResultPanel : MonoBehaviour
         pointText.text = "Point : "+point.ToString();
         timeText.text = "Time : " + (time / 60).ToString("00") + " : " + (time % 60).ToString("00");
     }
+    private void OnEnable()
+    {
+        SetPanel();
+    }
 }

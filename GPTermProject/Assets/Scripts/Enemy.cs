@@ -9,8 +9,9 @@ public class Enemy : MonoBehaviour, IHitable
     public NavMeshAgent agent;
     public Animator anim;
     public int hp;
+    int curhp;
     public int power;
-
+    public int enemyNum;
     new public Collider collider;
     public Collider punch;
     new public Rigidbody rigidbody;
@@ -35,6 +36,7 @@ public class Enemy : MonoBehaviour, IHitable
 
     public void Init()
     {
+        curhp = hp;
         gameObject.SetActive(true);
         agent.isStopped = false;
         collider.enabled = true;
@@ -65,11 +67,12 @@ public class Enemy : MonoBehaviour, IHitable
     }
     public void Hit(int damage)
     {
-        hp -= damage;
-        Debug.Log("Hit : "+ hp);
-        if(hp <= 0)
+        curhp -= damage;
+        Debug.Log("Hit : "+ curhp);
+        if(curhp <= 0)
         {
             //사망 이벤트 발생
+            collider.enabled = false;
             Dead();
         }
         else
@@ -85,11 +88,11 @@ public class Enemy : MonoBehaviour, IHitable
         
         StopAllCoroutines();
         agent.isStopped = true;
-        collider.enabled = false;
+        
 
-        GameManager.Instance.point += 100;
+        GameManager.Instance.point += hp;
 
-        GameManager.Instance.enemyPool.Release(this);
+        GameManager.Instance.enemyPool[enemyNum].Release(this);
         // 사망 모션 출력
         SetState(new DeadState());
         StartCoroutine(SetDisable());

@@ -20,7 +20,8 @@ public class Cake : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Punch"))
         {
-            DecreaseHp(1);
+            var enemy = other.transform.root.GetComponentInChildren<Enemy>();
+            DecreaseHp(enemy.power);
         }
     }
     public void DecreaseHp(int i)

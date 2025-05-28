@@ -1,6 +1,5 @@
 using System.Collections;
-using System.Threading;
-using Unity.VisualScripting;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
@@ -9,24 +8,30 @@ public class PlayerControl : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     InputSystem_Actions _inputActions;
-    public GameObject cupCake;
+    public List<GameObject> cupCakes;
+    GameObject curCake;
 
     public Transform rHand;
+    public Rigidbody rb;
     public Animator anim;
 
+    public PlayerSetting data;
     public float speed;
-    public float rotateSpeed;
+    float rotateSpeed;
     Vector3 direction;
     public float power;
     private void Awake()
     {
         _inputActions = new InputSystem_Actions();
         anim = GetComponentInChildren<Animator>();
+        rb = GetComponent<Rigidbody>();
     }
 
     bool isThrowing = false;
     private void Start()
     {
+        rotateSpeed = data.RotateSpeed;
+        curCake = cupCakes[0];
         _inputActions.Player.Move.started += value => anim.SetBool("IsRun", true);
         _inputActions.Player.Move.performed += value =>
         {
@@ -34,6 +39,7 @@ public class PlayerControl : MonoBehaviour
             direction.x = vec.x;
             direction.z = vec.y;
             direction.Normalize();
+            
         };
         _inputActions.Player.Move.canceled += value =>
         {
@@ -56,11 +62,20 @@ public class PlayerControl : MonoBehaviour
         };
         _inputActions.Player.Attack.performed += Throw;
         _inputActions.Player.Interact.performed += Roll;
+
+
         GameManager.Instance.OnGameOver.AddListener(() =>
         {
             _inputActions.Player.Attack.performed -= Throw;
             _inputActions.Player.Interact.performed -= Roll;
         });
+
+        _inputActions.Player.Respawn.started += x =>
+        {
+            transform.position = GameManager.Instance.RespawnPoint.position;
+            rb.linearVelocity = Vector3.zero;
+        };
+
     }
     void Roll(InputAction.CallbackContext context)
     {
@@ -79,7 +94,7 @@ public class PlayerControl : MonoBehaviour
     }
     IEnumerator RollCoroutine()
     {
-        var cake = Instantiate(cupCake, rHand.position, rHand.rotation);
+        var cake = Instantiate(curCake, rHand.position, rHand.rotation);
         var rigidbody = cake.GetComponent<Rigidbody>();
         rigidbody.AddForce(Camera.main.transform.forward * power * 0.1f, ForceMode.Impulse);
         yield return new WaitForSeconds(1.5f);
@@ -90,7 +105,7 @@ public class PlayerControl : MonoBehaviour
         
         //isThrowing = true;  
         //yield return new WaitForSeconds(0.65f);
-        var cake = Instantiate(cupCake, rHand.position, rHand.rotation);
+        var cake = Instantiate(curCake, rHand.position, rHand.rotation);
         var rigidbody = cake.GetComponent<Rigidbody>();
         rigidbody.AddForce((Camera.main.transform.forward+Vector3.up*0.5f).normalized * power, ForceMode.Impulse);
         yield return new WaitForSeconds(1.5f);
@@ -99,10 +114,22 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(direction * Time.deltaTime * speed);
+        var worldDir = transform.TransformDirection(direction);
+        rb.linearVelocity = new Vector3(worldDir.x*speed, rb.linearVelocity.y, worldDir.z*speed);
+        //transform.Translate(direction * Time.deltaTime * speed);
         //Debug.Log(direction);
         anim.SetFloat("deltaX", direction.x);
         anim.SetFloat("deltaZ", direction.z);
+
+        for(int i = 0; i < cupCakes.Count; i++)
+        {
+            if(Input.GetKeyDown(KeyCode.Alpha0 + i + 1))
+            {
+                curCake = cupCakes[i];
+            }
+        }
+
+
     }
     private void OnEnable()
     {

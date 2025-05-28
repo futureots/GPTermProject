@@ -7203,6 +7203,7 @@ GameObject:
   - component: {fileID: 1368941776}
   - component: {fileID: 1368941778}
   - component: {fileID: 1368941777}
+  - component: {fileID: 1368941779}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -7271,6 +7272,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1368941775}
   m_CullTransparentMesh: 1
+--- !u!114 &1368941779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1368941775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 175d98dbf75c7bc4e85f69955806f31a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointText: {fileID: 685729802}
+  timeText: {fileID: 1944109996}
 --- !u!1001 &1377812892
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7643,6 +7658,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4281780448642680, guid: 0f9577b4dda6cc546abea4737be5a392, type: 3}
   m_PrefabInstance: {fileID: 1446280627}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1446871525
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1446871526}
+  m_Layer: 0
+  m_Name: PlayerSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1446871526
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1446871525}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -12, y: 7, z: 315}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1452649916
 GameObject:
   m_ObjectHideFlags: 0
@@ -7964,7 +8010,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -9765,11 +9811,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d140ad223eb7af6448030953c569d5c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cupCake: {fileID: 1055331428171743082, guid: a4680528b05a19740abcaf3fa752c3a2, type: 3}
+  cupCakes:
+  - {fileID: 4916979268830257252, guid: 0905426a0979134458ff01482f3798da, type: 3}
+  - {fileID: 1055331428171743082, guid: a4680528b05a19740abcaf3fa752c3a2, type: 3}
   rHand: {fileID: 2055308200}
+  rb: {fileID: 0}
   anim: {fileID: 1023662632}
+  data: {fileID: 11400000, guid: 07be7d372cad86c4086ebfef8a7c5e32, type: 2}
   speed: 5
-  rotateSpeed: 5
   power: 15
 --- !u!54 &1769473888
 Rigidbody:
@@ -11688,7 +11737,11 @@ MonoBehaviour:
   - {fileID: 690087094}
   - {fileID: 469081373}
   - {fileID: 613074555}
+  enemyPrefabs:
+  - {fileID: 3148312171714361421, guid: 60ab07b23a75fbf458c80cba08df9edb, type: 3}
+  - {fileID: -8037681611264669852, guid: 1dacc378b7a85e64696e56ce8d0ce8a7, type: 3}
   enemyPrefab: {fileID: 3148312171714361421, guid: 60ab07b23a75fbf458c80cba08df9edb, type: 3}
+  RespawnPoint: {fileID: 1446871526}
   OnGameOver:
     m_PersistentCalls:
       m_Calls:
@@ -12672,3 +12725,4 @@ SceneRoots:
   - {fileID: 388957696}
   - {fileID: 829422928}
   - {fileID: 1310347352}
+  - {fileID: 1446871526}

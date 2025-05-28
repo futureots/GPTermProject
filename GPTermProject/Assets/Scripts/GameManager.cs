@@ -12,7 +12,7 @@ public class GameManager : Singleton<GameManager>
     public Cake cake;
 
     //적 오브젝트 풀
-    public ObjectPool<Enemy> enemyPool;
+    public List<ObjectPool<Enemy>> enemyPool;
     public List<Enemy> activeEnemies;
     public Transform pool;
 
@@ -20,8 +20,10 @@ public class GameManager : Singleton<GameManager>
 
     [ContextMenuItem("SetSpawnPoint","SetSpawnPointList")]
     public List<GameObject> SpawnPoint;
+    public List<Enemy> enemyPrefabs;
     public Enemy enemyPrefab;
 
+    public Transform RespawnPoint;
 
     public UnityEvent OnGameOver;
     private void Start()
@@ -29,8 +31,12 @@ public class GameManager : Singleton<GameManager>
         activeEnemies = new List<Enemy>();
         point = 0;
         time = 0;
-        enemyPool = new ObjectPool<Enemy>(
-            createFunc: SpawnEnemy,
+        enemyPool = new List<ObjectPool<Enemy>>();
+        for(int i = 0; i < 2; i++)
+        {
+            int t = i;
+            var pool = new ObjectPool<Enemy>(
+            createFunc: () => SpawnEnemy(t),
             actionOnGet: x => activeEnemies.Add(x),
             actionOnRelease: x => activeEnemies.Remove(x),
             actionOnDestroy: DestroyEnemy,
@@ -38,15 +44,23 @@ public class GameManager : Singleton<GameManager>
             defaultCapacity: 10,
             maxSize: 100
             );
+            enemyPool.Add(pool);
+        }
+        
         StartCoroutine(SpawnEnemyCoroutine());
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
-
-    // 적 생성
-    Enemy SpawnEnemy()
+    private void Update()
     {
-        var instance = Instantiate(enemyPrefab) as Enemy;
+        time += Time.deltaTime;
+    }
+    // 적 생성
+    Enemy SpawnEnemy(int i)
+    {
+
+        var instance = Instantiate(enemyPrefabs[i]) as Enemy;
+        
         instance.transform.SetParent(pool);
         instance.targetTr = cake.transform;
         return instance;
@@ -59,10 +73,22 @@ public class GameManager : Singleton<GameManager>
     {
         var spawnPool = new List<GameObject>();
         spawnPool.AddRange(SpawnPoint);
+        float delay = 1f;
+        int count = 0;
         while (true)
         {
-            yield return new WaitForSeconds(1);
-            var enemy = enemyPool.Get();
+            yield return new WaitForSeconds(delay);
+            count++;
+            if(count > 30)
+            {
+                count = 0;
+                delay *= 0.9f;
+            }
+            int enemyRand = UnityEngine.Random.Range(0, (int)time / 60+1);
+            enemyRand = Mathf.Min(1, enemyRand);
+            Enemy enemy = enemyPool[enemyRand].Get();
+
+            
             if (spawnPool.Count < 5)
             {
                 spawnPool.AddRange(SpawnPoint);
@@ -103,7 +129,7 @@ public class GameManager : Singleton<GameManager>
             }
             else
             {
-                // NavMesh에 안 올라가 있을 경우 → 이동도 못 하니 그냥 Rigidbody 멈추기
+                // NavMesh에 안 올라가 있을 경우 이동도 못 하니 그냥 Rigidbody 멈추기
                 Rigidbody rb = item.agent.GetComponent<Rigidbody>();
                 if (rb != null)
                 {

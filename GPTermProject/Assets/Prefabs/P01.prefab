@@ -534,8 +534,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.25
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 0.2
+  m_Center: {x: 0.05, y: 0, z: 0}
 --- !u!1 &941665128615554309
 GameObject:
   m_ObjectHideFlags: 0
@@ -2921,7 +2921,8 @@ MonoBehaviour:
   agent: {fileID: 0}
   anim: {fileID: 0}
   hp: 50
-  power: 100
+  power: 1
+  enemyNum: 0
   collider: {fileID: 0}
   punch: {fileID: 4740186858503022524}
   rigidbody: {fileID: 0}
