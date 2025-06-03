@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: PlayerSetting
   m_EditorClassIdentifier: 
   RotateSpeed: 3
+  BgmSound: 0.5

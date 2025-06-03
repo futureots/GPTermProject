@@ -4,4 +4,5 @@ using UnityEngine;
 public class PlayerSetting : ScriptableObject
 {
     public float RotateSpeed;
+    public float BgmSound;
 }

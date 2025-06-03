@@ -16,6 +16,7 @@ public class PlayerControl : MonoBehaviour
     public Animator anim;
 
     public PlayerSetting data;
+    public AudioSource audioSource;
     public float speed;
     float rotateSpeed;
     Vector3 direction;
@@ -31,6 +32,7 @@ public class PlayerControl : MonoBehaviour
     private void Start()
     {
         rotateSpeed = data.RotateSpeed;
+        audioSource.volume = data.BgmSound;
         curCake = cupCakes[0];
         _inputActions.Player.Move.started += value => anim.SetBool("IsRun", true);
         _inputActions.Player.Move.performed += value =>

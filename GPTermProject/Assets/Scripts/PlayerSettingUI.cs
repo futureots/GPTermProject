@@ -12,13 +12,13 @@ public class PlayerSettingUI : MonoBehaviour
     void Start()
     {
         slider.value = setting.RotateSpeed / maxSpeed;
-        slider.onValueChanged.AddListener(x => setting.RotateSpeed = x * maxSpeed);
+        slider.onValueChanged.AddListener(x => setting.RotateSpeed = (int)(x * maxSpeed * 100) / 100f);
     }
 
     // Update is called once per frame
     void Update()
     {
-        value.text = "Speed : " + setting.RotateSpeed;
+        value.text = "°¨µµ : " + setting.RotateSpeed;
     }
 
 
