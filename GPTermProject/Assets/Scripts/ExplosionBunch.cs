@@ -20,7 +20,7 @@ public class ExplosionBunch : MonoBehaviour
         {
             var pos = collisions[i].intersection;
             var list = Physics.OverlapSphere(pos, size * 1.5f);
-            Debug.Log(other.name);
+            //Debug.Log(other.name);
             foreach (var item in list)
             {
                 var enemy = item.GetComponent<Enemy>();

@@ -17,6 +17,7 @@ public class PlayerControl : MonoBehaviour
 
     public PlayerSetting data;
     public AudioSource audioSource;
+    public WeaponUI ui;
     public float speed;
     float rotateSpeed;
     Vector3 direction;
@@ -88,7 +89,7 @@ public class PlayerControl : MonoBehaviour
     }
     void Throw(InputAction.CallbackContext context)
     {
-        Debug.Log("Throw");
+        //Debug.Log("Throw");
         if (!isThrowing)
         {
             StartCoroutine(ThrowCoroutine());
@@ -127,11 +128,10 @@ public class PlayerControl : MonoBehaviour
         {
             if(Input.GetKeyDown(KeyCode.Alpha0 + i + 1))
             {
+                ui.ShowUI(i);
                 curCake = cupCakes[i];
             }
         }
-
-
     }
     private void OnEnable()
     {
